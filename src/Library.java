@@ -5,6 +5,10 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import dao.*;
 import domain.*;
+import services.AuthorService;
+import services.BookService;
+import services.BorrowerService;
+import services.ReservationService;
 import utils.ConsoleColors;
 import utils.db.DatabaseConnection;
 
@@ -24,16 +28,18 @@ public class Library {
         AuthorDAO authorDAO = new AuthorDAO(connection);
         BorrowerDAO borrowerDAO = new BorrowerDAO(connection);
         ReservationDAO reservationDAO = new ReservationDAO(connection);
+        BookService bookService = new BookService(bookDAO);
+        AuthorService authorService = new AuthorService(authorDAO);
+        ReservationService reservationService = new ReservationService(reservationDAO);
+        BorrowerService borrowerService = new BorrowerService(borrowerDAO);
         int choice;
         Scanner input = new Scanner(System.in);
         do {
-
-
-            showMenu();
-
+            generateStatisticsReport();
+            //showMenu();
 
             while (!input.hasNextInt()) {
-                System.out.println(ConsoleColors.RED+"ENTER A VALID CHOICE BETWEEN 0 AND 8."+ConsoleColors.RESET);
+                System.out.println(ConsoleColors.RED+"ENTER A VALID CHOICE BETWEEN 0 AND 14."+ConsoleColors.RESET);
                 input.next(); // Consume the non-integer input
             }
 
@@ -44,49 +50,43 @@ public class Library {
                 case 0:
                     break;
                 case 1:
-                    Book book = new Book();
-                    bookDAO.insert(book);
+                    bookService.createAndSaveBook();
                     break;
                 case 2:
-                    bookDAO.upgradeQuantity();
+                    bookService.upgradeQuantity();
                     break;
                 case 3:
-                    bookDAO.searchBooks();
+                    bookService.searchBooks();
                     break;
                 case 4:
-                    bookDAO.showAllBooks();
+                    bookService.showAllBooks();
                     break;
                 case 5:
-                    Borrower borrower = new Borrower();
-                    borrowerDAO.insert(borrower);
+                    borrowerService.insert();
                     break;
                 case 6:
-                    borrowerDAO.showAllBorrowers();
+                    borrowerService.showAllBorrowers();
                     break;
                 case 7:
-                    Reservation reservation = new Reservation();
-                    reservationDAO.checkOut(reservation);
+                    reservationService.checkoutReservation();
                     break;
                 case 8:
-                    reservationDAO.checkIn();
+                    reservationService.checkInReservation();
                     break;
-
                 case 9:
-                    Author author = new Author();
-                    authorDAO.insert(author);
+                    authorService.createAndSaveAuthor();
                     break;
                 case 10:
-                    authorDAO.showAllAuthors();
+                    authorService.showAllAuthors();
                     break;
                 case 11:
-                    reservationDAO.showAllReservations();
+                    reservationService.showAllReservations();
                     break;
                 case 12:
-                    bookDAO.deleteBook();
+                    bookService.deleteBook();
                     break;
                 case 13:
-                    Book bookToBeUpdated =  bookDAO.getBookByISBN();
-                    bookDAO.updateBook(bookToBeUpdated);
+                    bookService.updateBook();
                     break;
                 case 14:
                     generateStatisticsReport();
@@ -111,25 +111,18 @@ public class Library {
                 "Press 6 to Show All Registered Borrowers.");
         System.out.println("Press 7 to Check Out Book. ");
         System.out.println("Press 8 to Check In Book");
-        System.out.println("Press 9 Add Author");
-        System.out.println("Press 10 Show All Authors");
-        System.out.println("Press 11 Show All Reservations");
-        System.out.println(ConsoleColors.RED+"Press 12 Delete Book"+ConsoleColors.RESET);
-        System.out.println("Press 13 Update Book");
-        System.out.println("Press 14 Generate Statistics Report");
+        System.out.println("Press 9 to Add Author");
+        System.out.println("Press 10 to Show All Authors");
+        System.out.println("Press 11 to Show All Reservations");
+        System.out.println(ConsoleColors.RED+"Press 12 to Delete Book"+ConsoleColors.RESET);
+        System.out.println("Press 13 to Update Book");
+        System.out.println("Press 14 to Generate Statistics Report");
         System.out.println("Press 0 to Exit Application.");
         System.out.println(
                 "-------------------------------------------------------------------------------------------------------");
     }
 
     public static void generateStatisticsReport() {
-        Connection connection;
-        try {
-            connection = DatabaseConnection.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to connect to the database.");
-        }
 
         String sql = "SELECT COUNT(*) as borrowed," +
                 "(SELECT COUNT(*) FROM `reservations` WHERE status = 'Lost') as lost," +
@@ -152,18 +145,45 @@ public class Library {
                 int returned = resultSet.getInt("returned");
                 int authors = resultSet.getInt("authors");
                 int borrowers = resultSet.getInt("borrowers");
+                int max = Math.max(borrowed, Math.max(lost, Math.max(allbooks, Math.max(availablebooks, Math.max(returned, Math.max(authors, borrowers))))));
 
-                System.out.println("Statistics Report -----------------------");
-                System.out.println("Borrowed Books: " + ConsoleColors.GREEN + borrowed + ConsoleColors.RESET);
-                System.out.println("Returned Books: " + ConsoleColors.GREEN + returned + ConsoleColors.RESET);
-                System.out.println("Lost Books: " + ConsoleColors.GREEN + lost + ConsoleColors.RESET);
-                System.out.println("Total Books: " + ConsoleColors.GREEN + allbooks + ConsoleColors.RESET);
-                System.out.println("Available Books: " + ConsoleColors.GREEN + availablebooks + ConsoleColors.RESET);
-                System.out.println("Total Authors: " + ConsoleColors.GREEN + authors + ConsoleColors.RESET);
-                System.out.println("Total Borrowers: " + ConsoleColors.GREEN + borrowers + ConsoleColors.RESET);
+                System.out.print(ConsoleColors.CYAN);
+                System.out.println("Statistics Chart:");
+                drawHorizontalBarChart("Borrowed Books: ", borrowed, max);
+                drawHorizontalBarChart("Returned Books: ", returned, max);
+                drawHorizontalBarChart("Lost Books:     ", lost, max);
+                drawHorizontalBarChart("Total Books:    ", allbooks, max);
+                drawHorizontalBarChart("Available Books:", availablebooks, max);
+                drawHorizontalBarChart("Total Authors:  ", authors, max);
+                drawHorizontalBarChart("Total Borrowers:", borrowers, max);
+                System.out.print("                 |");
+                for (int i = 0; i < 110; i++) {
+                    System.out.print("_");
+                }
+                System.out.print(ConsoleColors.RESET);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
+    public static void drawHorizontalBarChart(String label, int value, int maxValue) {
+        int filledWidth = (int) Math.round((double) value * 100 / maxValue);
+
+        // Create the bar chart
+        StringBuilder chart = new StringBuilder();
+        chart.append(label);
+        chart.append(" |");
+
+        for (int i = 0; i < filledWidth; i++) {
+                chart.append("-");
+        }
+        chart.append(value);
+
+
+        // Print the chart
+        System.out.println(chart);
+    }
+
 }

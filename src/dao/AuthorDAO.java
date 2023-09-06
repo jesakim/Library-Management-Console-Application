@@ -14,45 +14,37 @@ public class AuthorDAO {
         connection = conn;
     }
 
-    public void insert(Author author) {
+    public boolean insert(Author author) {
         String insertQuery = "INSERT INTO authors (name) VALUES (?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
             preparedStatement.setString(1, author.getName());
+            int rowsAffected = preparedStatement.executeUpdate();
 
-            preparedStatement.executeUpdate();
-            System.out.println(ConsoleColors.GREEN+"Author INSERTED SUCCESSFULLY."+ConsoleColors.RESET);
+            if (rowsAffected > 0) {
+                return true;
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to insert the Author into the database.");
         }
+        return false;
     }
 
-    public void showAllAuthors(){
+    public ResultSet getAllAuthors(){
         // Define column widths (adjust as needed)
 
 
 
         String sql = "SELECT * FROM authors";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            // Display the list of books in a formatted table
-            System.out.printf("%-15s %-15s%n",
-                    "Id", "Name");
-            System.out.println(
-                    "-----------------------------------------------------------------------------");
-
-            while (resultSet.next()) {
-                // Retrieve book information from the result set
-                int id = resultSet.getInt("Id");
-                String name = resultSet.getString("name");
-
-                System.out.printf("%-15s %-15s%n",
-                        id,name);
-
-            }
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

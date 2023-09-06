@@ -12,16 +12,9 @@ public class Borrower {
     public List<Reservation> reservations;
 
     // Constructor
-    public Borrower() {
-        do {
-            System.out.print("Enter Borrower Name: ");
-            this.name = scanner.nextLine();
-        } while (!name.matches("\\S+"));
-
-        do {
-            System.out.print("Enter Borrower Phone: ");
-            this.phone = scanner.nextLine();
-        } while (!phone.matches("\\S+"));
+    public Borrower(String name,String phone) {
+        this.name = name;
+        this.phone = phone;
     }
 
     // Getter for name

@@ -15,49 +15,35 @@ public class BorrowerDAO {
         connection = conn;
     }
 
-    public void insert(Borrower borrower) {
+    public boolean insert(Borrower borrower) {
         String insertQuery = "INSERT INTO borrowers (name,phone) VALUES (?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
             preparedStatement.setString(1, borrower.getName());
             preparedStatement.setString(2, borrower.getPhone());
 
-            preparedStatement.executeUpdate();
-            System.out.println(ConsoleColors.GREEN+"Borrower INSERTED SUCCESSFULLY."+ConsoleColors.RESET);
+            if (preparedStatement.executeUpdate()>0){
+                return true;
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to insert the Borrower into the database.");
         }
+        return false;
     }
 
-    public void showAllBorrowers(){
-            // Define column widths (adjust as needed)
+    public ResultSet getAllBorrowers(){
+        // Define column widths (adjust as needed)
+        String sql = "SELECT * FROM borrowers";
 
-
-
-            String sql = "SELECT * FROM borrowers";
-
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                 ResultSet resultSet = preparedStatement.executeQuery()) {
-                // Display the list of books in a formatted table
-                System.out.printf("%-15s %-15s %-15s %n",
-                        "Id", "Name","Phone");
-                System.out.println(
-                        "-----------------------------------------------------------------------------");
-
-                while (resultSet.next()) {
-                    // Retrieve book information from the result set
-                    int id = resultSet.getInt("Id");
-                    String name = resultSet.getString("name");
-                    String phone = resultSet.getString("phone");
-
-                    System.out.printf("%-15s %-15s %-15s %n",
-                            id,name,phone);
-
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static Boolean checkBorrowerId(int id) {

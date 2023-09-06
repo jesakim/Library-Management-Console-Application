@@ -11,34 +11,9 @@ public class Book {
     private int author_id;
     private int quantity;
 
-    public Book() {
-
-        do {
-            System.out.print("Enter Unique ISBN: ");
-            this.ISBN = scanner.nextLine();
-        }while (BookDAO.checkISBN(this.ISBN));
-
-        do {
-        System.out.print("Enter title: ");
-        this.title = scanner.nextLine();
-        } while (!title.matches("\\S+"));
-
-        System.out.print("Enter author ID: ");
-        while (!scanner.hasNextInt()) {
-        System.out.print("Enter author ID: ");
-        scanner.next();
-        }
-        this.author_id = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.print("Enter quantity: ");
-        while (!scanner.hasNextInt()) {
-        System.out.print("Enter quantity: ");
-        scanner.next();
-        }
-        this.quantity = scanner.nextInt();
-
-        scanner.nextLine(); // Consume the newline character
+    public Book(String isbn, int quantity) {
+        this.ISBN = isbn;
+        this.quantity = quantity;
     }
 
     public Book(String isbn, String title, int author_id, int quantity) {

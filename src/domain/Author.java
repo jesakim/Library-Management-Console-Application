@@ -11,11 +11,8 @@ public class Author{
         public ArrayList<Book> books;
 
         // Constructor
-        public Author() {
-            do {
-                System.out.print("Enter Author Name: ");
-                this.name = scanner.nextLine();
-            } while (!name.matches("\\S+"));
+        public Author(String name) {
+            this.name = name;
         }
 
         // Getter for name

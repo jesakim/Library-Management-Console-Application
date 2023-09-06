@@ -13,23 +13,10 @@ public class Reservation {
         private int duration;
 
         // Constructor
-        public Reservation() {
-            do {
-                System.out.print("Enter the book ISBN: ");
-                this.isbn = scanner.nextLine();
-            }while (!BookDAO.checkISBN(this.isbn));
-
-            do {
-                System.out.print("Enter Borrower ID: ");
-                this.borrowerId = scanner.nextInt();
-            }while (!BorrowerDAO.checkBorrowerId(this.borrowerId));
-
-            System.out.print("Enter duration: ");
-            while (!scanner.hasNextInt()) {
-                System.out.print("Enter duration: ");
-                scanner.next();
-            }
-            this.duration = scanner.nextInt();
+        public Reservation(String isbn,int borrowerId,int duration) {
+            this.isbn = isbn;
+            this.borrowerId = borrowerId;
+            this.duration = duration;
         }
 
         // Getter for ISBN

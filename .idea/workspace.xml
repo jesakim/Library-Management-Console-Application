@@ -2,27 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77447fa3-9248-41bd-9298-adb10fe9caa1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ACDGDB.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/mysql-connector-j-8.1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Library.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/AuthorDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/BookDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/BorrowerDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/ReservationDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/Author.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/Borrower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/domain/Reservation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/ConsoleColors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/db/DatabaseConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/db/Migrations.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/AuthorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/BookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/BorrowerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Library.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/AuthorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AuthorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/BorrowerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/ReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ReservationDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Borrower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Borrower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ConsoleColors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ConsoleColors.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +33,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Library.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2UkEMHgDAKZKZHdxwmk6lHjNXCS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -50,25 +50,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/JavaProjects/ACDGDB",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.13333333",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/JavaProjects/ACDGDB&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.13333333&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\JavaProjects\ACDGDB\src\utils\db" />
@@ -121,7 +121,9 @@
       <workItem from="1693817100933" duration="20109000" />
       <workItem from="1693901755685" duration="13403000" />
       <workItem from="1693988675942" duration="796000" />
-      <workItem from="1693990821194" duration="1652000" />
+      <workItem from="1693990821194" duration="8307000" />
+      <workItem from="1694081492148" duration="12960000" />
+      <workItem from="1694164672968" duration="7169000" />
     </task>
     <servers />
   </component>
