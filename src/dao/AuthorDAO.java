@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import domain.Author;
+import utils.ConsoleColors;
 
 public class AuthorDAO {
     private static Connection connection;

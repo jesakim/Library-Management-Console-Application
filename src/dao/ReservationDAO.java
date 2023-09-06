@@ -1,9 +1,15 @@
+package dao;
+
+import utils.ConsoleColors;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
+
+import domain.Reservation;
+import dao.BookDAO;
 
 public class ReservationDAO {
 

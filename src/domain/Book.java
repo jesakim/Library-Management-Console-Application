@@ -2,6 +2,7 @@ package domain;
 
 
 import java.util.Scanner;
+import dao.BookDAO;
 
 public class Book {
     Scanner scanner = new Scanner(System.in);

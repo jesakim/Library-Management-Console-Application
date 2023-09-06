@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 import domain.Book;
+import utils.ConsoleColors;
 
 public class BookDAO {
     private int width = 15;

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import domain.Borrower;
+import utils.ConsoleColors;
 
 public class BorrowerDAO {
 

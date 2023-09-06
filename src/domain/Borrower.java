@@ -1,12 +1,15 @@
 package domain;
 
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Borrower {
     Scanner scanner = new Scanner(System.in);
     private String name;
     private String phone;
+
+    public List<Reservation> reservations;
 
     // Constructor
     public Borrower() {

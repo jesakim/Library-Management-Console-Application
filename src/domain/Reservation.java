@@ -3,6 +3,9 @@ package domain;
 
 import java.util.Scanner;
 
+import dao.BorrowerDAO;
+import dao.BookDAO;
+
 public class Reservation {
         Scanner scanner = new Scanner(System.in);
         private String isbn;
