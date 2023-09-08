@@ -23,7 +23,7 @@ public class BookService {
         do {
             System.out.print("Enter Unique ISBN: ");
             ISBN = scanner.nextLine();
-        } while (BookDAO.checkISBN(ISBN));
+        } while (BookDAO.checkISBN(ISBN) || !ISBN.matches("\\S+"));
 
         String title;
         do {

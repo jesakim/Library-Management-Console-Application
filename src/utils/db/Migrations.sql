@@ -1,6 +1,9 @@
--- Author Table 
-
+-- Author Table
+DROP TABLE IF EXISTS `reservations`;
+DROP TABLE IF EXISTS `books`;
 DROP TABLE IF EXISTS `authors`;
+
+DROP TABLE IF EXISTS `borrowers`;
 
 CREATE TABLE `authors` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -12,7 +15,7 @@ INSERT INTO `authors` VALUES (1,'jamal'),(2,'JAMAL23');
 
 -- Books Table 
 
-DROP TABLE IF EXISTS `books`;
+
 
 CREATE TABLE `books` (
   `isbn` varchar(45) NOT NULL,
@@ -27,7 +30,7 @@ INSERT INTO `books` VALUES ('0','0000',1,45),('1213','23123',1,23),('123','123',
 
 -- Borrowers Table 
 
-DROP TABLE IF EXISTS `borrowers`;
+
 
 CREATE TABLE `borrowers` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -43,7 +46,7 @@ INSERT INTO `borrowers` VALUES (1,'jamal','05346546546');
 -- Reservations Table
 
 
-DROP TABLE IF EXISTS `reservations`;
+
 
 
 CREATE TABLE `reservations` (

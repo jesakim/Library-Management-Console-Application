@@ -35,11 +35,10 @@ public class Library {
         int choice;
         Scanner input = new Scanner(System.in);
         do {
-            generateStatisticsReport();
-            //showMenu();
+            showMenu();
 
             while (!input.hasNextInt()) {
-                System.out.println(ConsoleColors.RED+"ENTER A VALID CHOICE BETWEEN 0 AND 14."+ConsoleColors.RESET);
+                System.out.print(ConsoleColors.RED+"ENTER A VALID CHOICE BETWEEN 0 AND 14: "+ConsoleColors.RESET);
                 input.next(); // Consume the non-integer input
             }
 
@@ -98,28 +97,27 @@ public class Library {
     }
 
     public static void showMenu(){
-        // Displaying menu
-        System.out.println(
-                "----------------------------------------------------------------------------------------------------------");
-        System.out.println("Press 1 to Add new Book.");
-        System.out.println(
-                "Press 2 to Upgrade Quantity of a Book.");
-        System.out.println("Press 3 to Search a Book.");
-        System.out.println("Press 4 to Show All Books.");
-        System.out.println("Press 5 to Register Borrower.");
-        System.out.println(
-                "Press 6 to Show All Registered Borrowers.");
-        System.out.println("Press 7 to Check Out Book. ");
-        System.out.println("Press 8 to Check In Book");
-        System.out.println("Press 9 to Add Author");
-        System.out.println("Press 10 to Show All Authors");
-        System.out.println("Press 11 to Show All Reservations");
-        System.out.println(ConsoleColors.RED+"Press 12 to Delete Book"+ConsoleColors.RESET);
-        System.out.println("Press 13 to Update Book");
-        System.out.println("Press 14 to Generate Statistics Report");
-        System.out.println("Press 0 to Exit Application.");
-        System.out.println(
-                "-------------------------------------------------------------------------------------------------------");
+        // Displaying decorated menu
+        System.out.println("||============================================||");
+        System.out.println("||       Library Management System Menu       ||");
+        System.out.println("||============================================||");
+        System.out.println("||  Press 1  : Add new Book.                  ||");
+        System.out.println("||  Press 2  : Upgrade Quantity of a Book.    ||");
+        System.out.println("||  Press 3  : Search a Book.                 ||");
+        System.out.println("||  Press 4  : Show All Books.                ||");
+        System.out.println("||  Press 5  : Register Borrower.             ||");
+        System.out.println("||  Press 6  : Show All Registered Borrowers. ||");
+        System.out.println("||  Press 7  : Check Out Book.                ||");
+        System.out.println("||  Press 8  : Check In Book.                 ||");
+        System.out.println("||  Press 9  : Add Author.                    ||");
+        System.out.println("||  Press 10 : Show All Authors.              ||");
+        System.out.println("||  Press 11 : Show All Reservations.         ||" + ConsoleColors.RESET);
+        System.out.println("||"+ConsoleColors.RED + "  Press 12 : Delete Book."+ConsoleColors.RESET+"                   ||");
+        System.out.println("||  Press 13 : Update Book.                   ||");
+        System.out.println("||  Press 14 : Generate Statistics Report.    ||");
+        System.out.println("||  Press 0  : Exit Application.              ||");
+        System.out.println("||============================================||");
+        System.out.print("Enter Your Choice: ");
     }
 
     public static void generateStatisticsReport() {
@@ -160,7 +158,7 @@ public class Library {
                 for (int i = 0; i < 110; i++) {
                     System.out.print("_");
                 }
-                System.out.print(ConsoleColors.RESET);
+                System.out.println(ConsoleColors.RESET);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -169,7 +167,7 @@ public class Library {
 
 
     public static void drawHorizontalBarChart(String label, int value, int maxValue) {
-        int filledWidth = (int) Math.round((double) value * 100 / maxValue);
+        int filledWidth = (int) Math.ceil((double) value * 100 / maxValue);
 
         // Create the bar chart
         StringBuilder chart = new StringBuilder();
